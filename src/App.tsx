@@ -34,6 +34,10 @@ export default function App() {
       authentication={myAuthenticator}
       collections={[BlogCollection]}
       firebaseConfig={firebaseConfig}
+      signInOptions={[
+        "password",
+      ]}
+
     />
   );
 }
