@@ -12,21 +12,20 @@ import {
 import "typeface-rubik";
 import "@fontsource/ibm-plex-mono";
 
-type Project = {
+type Blog = {
   meta_title: string,
   meta_desc: string,
   canonical_url: string,
   slug: string,
   title: string;
   Description: string,
-  technology: EntityReference[],
-  project_img: EntityReference[],
+  featured_img: string,
 };
 
-const ProjectCollection = buildCollection<Project>({
-  name: "Project",
-  singularName: "Project",
-  path: "Project",
+const BlogCollection = buildCollection<Blog>({
+  name: "Blog",
+  singularName: "Blog",
+  path: "blog",
   textSearchEnabled: true,
   permissions: ({ user, authController }) => ({
     edit: true,
@@ -41,7 +40,7 @@ const ProjectCollection = buildCollection<Project>({
     meta_desc: buildProperty({
       name: "Meta Desc",
       dataType: "string",
-      markdown: true
+      multiline: true
     }),
     canonical_url: buildProperty({
       name: "Canonical Url",
@@ -57,29 +56,26 @@ const ProjectCollection = buildCollection<Project>({
       dataType: "string",
     }),
     Description: buildProperty({
-      name: "Description",
+      name: "Content",
       dataType: "string",
       markdown: true
     }),
-    technology: buildProperty({
-      name: "Technology Used",
-      dataType: "array",
-      of: {
-        dataType: "string",
-      },
-    }),
-    project_img: buildProperty({
-      name: "Product Image",
-      dataType: "array",
-      of: {
-        dataType: "string",
-        storage: {
+    featured_img: buildProperty({
+      dataType: "string",
+      name: "Featured Image",
+      storage: {
           storagePath: "images",
           acceptedFiles: ["image/*"],
-        }
-      },
+          maxSize: 1024 * 1024,
+          metadata: {
+              cacheControl: "max-age=1000000"
+          },
+          fileName: (context) => {
+              return context.file.name;
+          }
+      }
     }),
   },
 });
 
-export default ProjectCollection;
+export default BlogCollection;

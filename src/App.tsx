@@ -1,20 +1,7 @@
-import React, { useCallback } from "react";
-import HomeCollection from "./Collections/Home";
-import AboutCollection from "./Collections/About";
-import ProductCollection from "./Collections/Product";
-import SubProductCollection from "./Collections/Subproduct";
-import ProjectCollection from "./Collections/Project";
-import TechnicalCollection from "./Collections/Technical";
-
+import { useCallback } from "react";
+import BlogCollection from "./Collections/Blog";
 import { User as FirebaseUser } from "firebase/auth";
-import {
-  Authenticator,
-  buildCollection,
-  buildProperty,
-  EntityReference,
-  FirebaseCMSApp,
-} from "@camberi/firecms";
-
+import { Authenticator, FirebaseCMSApp } from "@camberi/firecms";
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -23,13 +10,11 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID,
 };
-
 const locales = {
   "en-US": "English (United States)",
   "es-ES": "Spanish (Spain)",
   "de-DE": "German",
 };
-
 export default function App() {
   const myAuthenticator: Authenticator<FirebaseUser> = useCallback(
     async ({ user, authController }) => {
@@ -39,17 +24,15 @@ export default function App() {
       console.log("Allowing access to", user?.email);
       const sampleUserRoles = await Promise.resolve(["admin"]);
       authController.setExtra(sampleUserRoles);
-
       return true;
     },
     []
   );
-
   return (
     <FirebaseCMSApp
-      name={"Backend Dashboard"}
+      name={"Personal Portfolio"}
       authentication={myAuthenticator}
-      collections={[HomeCollection, ProjectCollection]}
+      collections={[BlogCollection]}
       firebaseConfig={firebaseConfig}
     />
   );
