@@ -68,18 +68,7 @@ const BlogCollection = buildCollection<Blog>({
     }),
     featured_img: buildProperty({
       dataType: "string",
-      name: "Featured Image",
-      storage: {
-          storagePath: "images",
-          acceptedFiles: ["image/*"],
-          maxSize: 1024 * 1024,
-          metadata: {
-              cacheControl: "max-age=1000000"
-          },
-          fileName: (context) => {
-              return context.file.name;
-          }
-      }
+      name: "Featured Image Path",
     }),
   },
 });
