@@ -19,6 +19,7 @@ type Blog = {
   slug: string,
   title: string;
   Description: string,
+  schemaMarkup: string,
   featured_img: string,
 };
 
@@ -57,6 +58,11 @@ const BlogCollection = buildCollection<Blog>({
     }),
     Description: buildProperty({
       name: "Content",
+      dataType: "string",
+      markdown: true
+    }),
+    schemaMarkup: buildProperty({
+      name: "schemaMarkup",
       dataType: "string",
       markdown: true
     }),
