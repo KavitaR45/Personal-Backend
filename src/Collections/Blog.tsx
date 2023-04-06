@@ -21,6 +21,8 @@ type Blog = {
   Description: string,
   schemaMarkup: string,
   featured_img: string,
+  author: string,
+  date: string,
 };
 
 const BlogCollection = buildCollection<Blog>({
@@ -69,6 +71,14 @@ const BlogCollection = buildCollection<Blog>({
     featured_img: buildProperty({
       dataType: "string",
       name: "Featured Image Path",
+    }),
+    author: buildProperty({
+      dataType: "string",
+      name: "Author",
+    }),
+    date: buildProperty({
+      dataType: "string",
+      name: "Published Date",
     }),
   },
 });
