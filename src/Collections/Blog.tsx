@@ -20,6 +20,7 @@ type Blog = {
   title: string;
   Description: string,
   schemaMarkup: string,
+  faqSchema: string,
   featured_img: string,
   author: string,
   date: string,
@@ -65,6 +66,11 @@ const BlogCollection = buildCollection<Blog>({
     }),
     schemaMarkup: buildProperty({
       name: "schemaMarkup",
+      dataType: "string",
+      markdown: true
+    }),
+    faqSchema: buildProperty({
+      name: "faqSchema",
       dataType: "string",
       markdown: true
     }),
