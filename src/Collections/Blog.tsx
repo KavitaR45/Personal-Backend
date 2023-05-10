@@ -20,10 +20,12 @@ type Blog = {
   title: string;
   Description: string,
   schemaMarkup: string,
+  metaCard: string,
   faqSchema: string,
   featured_img: string,
   author: string,
   date: string,
+  status: string,
 };
 
 const BlogCollection = buildCollection<Blog>({
@@ -69,6 +71,11 @@ const BlogCollection = buildCollection<Blog>({
       dataType: "string",
       markdown: true
     }),
+    metaCard: buildProperty({
+      name: "Meta Tags",
+      dataType: "string",
+      markdown: true
+    }),
     faqSchema: buildProperty({
       name: "faqSchema",
       dataType: "string",
@@ -85,6 +92,14 @@ const BlogCollection = buildCollection<Blog>({
     date: buildProperty({
       dataType: "string",
       name: "Published Date",
+    }),
+    status: buildProperty({
+      dataType: "string",
+      name: "Status",
+      enumValues: {
+        draft: "Draft",
+        published: "Published",
+      }
     }),
   },
 });
