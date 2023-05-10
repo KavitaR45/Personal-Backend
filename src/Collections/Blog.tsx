@@ -26,6 +26,7 @@ type Blog = {
   author: string,
   date: string,
   status: string,
+  category: string,
 };
 
 const BlogCollection = buildCollection<Blog>({
@@ -99,6 +100,17 @@ const BlogCollection = buildCollection<Blog>({
       enumValues: {
         draft: "Draft",
         published: "Published",
+      }
+    }),
+    category: buildProperty({
+      dataType: "string",
+      name: "Category",
+      enumValues: {
+        Wordpress: "Wordpress",
+        Website: "Website",
+        Ecommerce: "Ecommerce",
+        Revamping: "Revamping",
+        Landing: "Landing",
       }
     }),
   },
